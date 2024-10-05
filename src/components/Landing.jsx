@@ -12,6 +12,7 @@ const Landing = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isError, setError] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
+  const [loadedImages, setLoadedImages] = useState({});
   const [sortConfig, setSortConfig] = useState({
     key: "market_cap",
     direction: "desc",
@@ -79,6 +80,10 @@ const Landing = () => {
   };
   let shimmerRows = new Array(7).fill(0);
 
+  const handleImageLoad = (id) => {
+    setLoadedImages((prev) => ({ ...prev, [id]: true }));
+  };
+
   if (isError) return <Error />;
 
   return (
@@ -140,15 +145,19 @@ const Landing = () => {
                     transition={{ duration: 0.1, delay: index * 0.05 }}
                   >
                     <td className="logo">
-                      {imgLoading && (
+                      {!loadedImages[crypto.id] && (
                         <Skeleton variant="circular" width={40} height={40} />
                       )}
                       {
                         <img
                           src={crypto.image}
                           className="crypto-logo"
-                          onLoad={() => setImgLoading(false)}
-                          styles={{ display: imgLoading ? "none" : "block" }}
+                          onLoad={() => handleImageLoad(crypto.id)}
+                          styles={{
+                            display: loadedImages[crypto.id]
+                              ? "inline-block"
+                              : "none",
+                          }}
                         />
                       }
                       {crypto.name}
