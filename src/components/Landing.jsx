@@ -11,6 +11,7 @@ const Landing = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [isError, setError] = useState(false);
+  const [imgLoading, setImgLoading] = useState(true);
   const [sortConfig, setSortConfig] = useState({
     key: "market_cap",
     direction: "desc",
@@ -139,13 +140,17 @@ const Landing = () => {
                     transition={{ duration: 0.1, delay: index * 0.05 }}
                   >
                     <td className="logo">
-                      <img
-                        src={crypto.image}
-                        className="crypto-logo"
-                        onLoad={
-                          <Skeleton variant="circular" width={40} height={40} />
-                        }
-                      />
+                      {imgLoading && (
+                        <Skeleton variant="circular" width={40} height={40} />
+                      )}
+                      {
+                        <img
+                          src={crypto.image}
+                          className="crypto-logo"
+                          onLoad={() => setImgLoading(false)}
+                          styles={{ display: imgLoading ? "none" : "block" }}
+                        />
+                      }
                       {crypto.name}
                     </td>
 
