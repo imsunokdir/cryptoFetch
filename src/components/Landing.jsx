@@ -33,6 +33,7 @@ const Landing = () => {
       .then((data) => {
         setData(data);
         setLoading(false);
+        preLoadImages(data);
       })
       .catch((err) => {
         console.log(err);
@@ -40,6 +41,28 @@ const Landing = () => {
         setError(true);
       });
   }, []);
+
+  const preLoadImages = (cryptoData) => {
+    cryptoData.forEach((crypto) => {
+      loadImages(crypto.image)
+        .then(() => {
+          setLoadedImages((prev) => ({ ...prev, [crypto.id]: true }));
+        })
+        .catch((err) => {
+          console.log("failed to load image: ", err);
+          setLoadedImages((prev) => ({ ...prev, [crypto.id]: false }));
+        });
+    });
+  };
+
+  const loadImages = (src) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => resolve(img);
+      img.onerror = () => reject;
+    });
+  };
 
   useEffect(() => {
     let result = data;
@@ -145,21 +168,17 @@ const Landing = () => {
                     transition={{ duration: 0.1, delay: index * 0.05 }}
                   >
                     <td className="logo">
-                      {!loadedImages[crypto.id] && (
+                      {loadedImages[crypto.id] === undefined ? (
                         <Skeleton variant="circular" width={40} height={40} />
-                      )}
-                      {
+                      ) : loadedImages[crypto.id] ? (
                         <img
                           src={crypto.image}
                           className="crypto-logo"
-                          onLoad={() => handleImageLoad(crypto.id)}
-                          styles={{
-                            display: loadedImages[crypto.id]
-                              ? "inline-block"
-                              : "none",
-                          }}
+                          alt={crypto.name}
                         />
-                      }
+                      ) : (
+                        <div className="image-error">Failed to load</div>
+                      )}
                       {crypto.name}
                     </td>
 
