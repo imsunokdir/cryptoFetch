@@ -1,0 +1,160 @@
+html, body{
+
+}
+
+#root{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+    /* background-color: yellow; */
+    height: 610px;
+    width: 90vw;
+
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 10px 0px;
+    background-color: rgba(255, 0, 0, 0.407);
+   
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+.inputs{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    align-items: center;
+}
+
+.search-input{
+    width: 45%;
+    font-size: 20px;
+    height: 30px;
+    padding: 0;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(210, 200, 200, 0.551);
+    padding: 5px;
+}
+.sorts{
+    display: flex;
+    gap:5px;
+    align-items: center;
+}
+
+select{
+    height: 25px;
+    border-radius: 5px;
+}
+
+.sorts button{
+    background-color: green;
+    height: 35px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.sorts button:hover{
+    cursor: pointer;
+    box-shadow: 3px 3px 10px gray;
+    transform: scale(1.05);
+}
+
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap:5px
+}
+
+.crypto-logo{
+    height: 35px;
+    width: 35px;
+
+    
+}
+
+
+
+
+td, th{
+    padding: 8px 15px;
+    border-bottom: 2px;
+}
+thead{
+    background-color: aqua;
+    border-radius: 10px;
+    border-radius: 10px;
+}
+
+th{
+    background-color: rgb(117, 117, 39);
+    text-align: start;
+    color: white;
+    height: 50px;
+
+}
+
+.error{
+    text-align: center;
+}
+
+.no-data{
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgba(255, 0, 0, 0.705);
+    color: rgb(240, 230, 230);
+}
+
+.spinner{
+    height: 100px;
+    width: 100px;
+}
+
+
+
+
+
+  .loader{
+    /* background-color: rgb(187, 158, 158); */
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100vh;
+
+    width: 100vw;
+  }
+
+
+  .price-wrapper {
+    display: flex;
+    align-items: baseline;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .currency {
+    flex-shrink: 0;
+    margin-right: 2px;
+  }
+  
+  .amount {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .shimmer-data-rows{
+    height: 75px;
+  }
